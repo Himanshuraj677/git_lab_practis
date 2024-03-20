@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs</title>
+</head>
+<body>
+    <div>
+        <pre>
+            Lab1
+            #include<stdio.h>
+            #include<string.h>
+            struct Calendar {
+                char name[10];
+                int date;
+                char activity[100];
+            };
+            
+            int main () {
+                struct Calendar Day[7];
+                Day[0].date = 1;
+                strcpy(Day[0].name, "Monday");
+                strcpy(Day[0].activity, "Sona hai");
+                Day[1].date = 2;
+                strcpy(Day[1].name, "Tuesday");
+                strcpy(Day[1].activity, "Padhna hai");
+                Day[2].date = 3;
+                strcpy(Day[2].name, "Wednesday");
+                strcpy(Day[2].activity, "Khana hai");
+                Day[3].date = 4;
+                strcpy(Day[3].name, "Thursday");
+                strcpy(Day[3].activity, "Likhna hai");
+                Day[4].date = 5;
+                strcpy(Day[4].name, "Friday");
+                strcpy(Day[4].activity, "Jana hai");
+                Day[5].date = 6;
+                strcpy(Day[5].name, "Saturday");
+                strcpy(Day[5].activity, "Assignment likhna hai");
+                Day[6].date = 7;
+                strcpy(Day[6].name, "Sunday");
+                strcpy(Day[6].activity, "Goa jana hai");
+                for (int i = 0; i <= 6; i++ ) {
+                    printf("date:%d/nDay:%s/nactivity:%s/n", Day[i].date, Day[i].name, Day[i].activity);
+                }
+            
+                return 0;
+            }
+            
+            Lab2
+            #include<stdio.h>
+            #include<string.h>
+            int main () {
+                char MAIN[100], PAT[20], REP[20];
+                printf("Enter the main string:");
+                gets(MAIN);
+                printf("Enter the PATtern string:");
+                gets(PAT);
+                printf("Enter the replace string:");
+                gets(REP);
+                int flag = 0, j;
+                int len = strlen(MAIN);
+                int pLen = strlen(PAT);
+                for (int i = 0; i <= len - pLen; i++) {
+                    if (MAIN[i] == PAT[0]) {
+                        for (j = 0; j < pLen; j++) {
+                            if (MAIN[i + j] != PAT[j]) break;
+                        }
+                        if (j == pLen) {
+                            for (int j = 0; j < pLen; j++) {
+                                MAIN[i + j] = REP[j];
+                            }
+                            i += pLen;
+                            flag = 1;
+                        }
+                    }
+                }
+                if (flag == 1) printf("%s", MAIN);
+                else printf("Pattern not found");
+                return 0;
+            }
+        </pre>
+    </div>
+</body>
+</html>

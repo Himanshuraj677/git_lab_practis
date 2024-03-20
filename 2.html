@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program2</title>
+</head>
+<body>
+    <div>
+        <pre>
+            #include<stdio.h>
+            #include<string.h>
+            int main () {
+                char MAIN[100], PAT[20], REP[20];
+                printf("Enter the main string:");
+                gets(MAIN);
+                printf("Enter the PATtern string:");
+                gets(PAT);
+                printf("Enter the replace string:");
+                gets(REP);
+                int flag = 0, j;
+                int len = strlen(MAIN);
+                int pLen = strlen(PAT);
+                for (int i = 0; i <= len - pLen; i++) {
+                    if (MAIN[i] == PAT[0]) {
+                        for (j = 0; j < pLen; j++) {
+                            if (MAIN[i + j] != PAT[j]) break;
+                        }
+                        if (j == pLen) {
+                            for (int j = 0; j < pLen; j++) {
+                                MAIN[i + j] = REP[j];
+                            }
+                            i += pLen;
+                            flag = 1;
+                        }
+                    }
+                }
+                if (flag == 1) printf("%s", MAIN);
+                else printf("Pattern not found");
+                return 0;
+            }
+        </pre>
+    </div>
+</body>
+</html>

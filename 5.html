@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program5</title>
+</head>
+<body>
+    <div>
+        <pre>
+            Lab1
+            #include<stdio.h>
+            #include<math.h>
+            #include<string.h>
+            #include<ctype.h>
+            
+            #define MAX 100
+            int stack[100];
+            int top = -1;
+            
+            void push(char x) {
+                stack[++top] = x;
+            }
+            
+            char pop() {
+                return stack[top--];
+            }
+            
+            int calculate (int num1, int num2, char op) {
+                switch (op)
+                {
+                case '+': return num1 + num2;
+                case '-': return num1 - num2;
+                case '*': return num1 * num2;
+                case '/': return num1 / num2;
+                case '%': return num1 % num2;
+                case '^': return pow(num1, num2);
+                }
+            }
+            int main () {
+                char psfx[100];
+                printf("Enter your postfix expression:");
+                scanf("%[^/n]", &psfx);
+                int ans;
+                for (int i = 0; i < strlen(psfx); i++) {
+                    char num = psfx[i];
+                    if (num == ' ') continue;
+                    if (isalnum(num)) push(num - '0');
+                    else {
+                        int op1 = pop();
+                        int op2 = pop();
+                        int ans = calculate(op2, op1, num);
+                        push(ans);
+                    }
+                }
+                printf("Answer is: %d", pop());
+                return 0;
+            }
+
+            Lab2
+            // Tower of hanoi
+            #include<stdio.h>
+            #include<math.h>
+            void towerOfHanoi (int num, char src, char dest, char help) {
+                if (num == 0) return;
+                towerOfHanoi(num - 1, src, help, dest);
+                printf("Moving %d disc from %c to %c\n",num, src, dest);
+                towerOfHanoi(num - 1, help, dest, src);
+            }
+            int main () {
+                printf("Enter the number of disk:");
+                int num;
+                scanf("%d", &num);
+                towerOfHanoi(num, 'A', 'C', 'B');
+                printf("Nuber of moves:%d", (int)pow(2, num) - 1);
+                return 0;
+            }
+        </pre>
+    </div>
+</body>
+</html>

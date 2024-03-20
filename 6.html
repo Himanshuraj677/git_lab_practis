@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program6</title>
+</head>
+<body>
+    <div>
+        <pre>
+            #include<stdio.h>
+            #include<stdlib.h>
+            #define MAX_SIZE 3
+            int queue[MAX_SIZE];
+            int front = -1, rear = -1;
+            
+            int isEmpty () {
+                return (front == -1 && rear == -1);
+            }
+            
+            int isFull () {
+                return ((rear + 1) % MAX_SIZE == front);
+            }
+            
+            void enqueue () {
+                int data;
+                if (isFull()) {
+                    printf("Queue is full\n");
+                    return;
+                }
+                printf("Enter the data to be inserted:");
+                scanf("%d", &data);
+                if (isEmpty()) {
+                    front = rear = 0;
+                }
+                else {
+                    rear = (rear + 1) % MAX_SIZE;
+                }
+                queue[rear] = data;
+                printf("%d is inserted\n", data);
+            }
+            
+            void dequeue () {
+                int data;
+                if (isEmpty()) {
+                    printf("Queue is empty.\n");
+                    return;
+                }
+                data = queue[front];
+                if (front == rear) {
+                    front = rear = -1;
+                }
+                else {
+                    front = (front + 1 ) % MAX_SIZE;
+                }
+                printf("%d is removed\n", data);
+            }
+            
+            void display () {
+                if (isEmpty()) {
+                    printf("Queue is Empty\n");
+                    return;
+                }
+                int i;
+                for (i = front; i != rear; i = (i + 1) % MAX_SIZE) printf("%d ", queue[i]);
+                printf("%d\n", queue[i]);
+            }
+            
+            int main () {
+                printf("1) Enqueue\n2) Dequeue\n3) Display\n4) Exit\n");
+                int choice;
+                while (1) {
+                    printf("Enter your choice:");
+                    scanf("%d", &choice);
+                    switch (choice)
+                    {
+                    case 1:
+                        enqueue();
+                        break;
+                    case 2:
+                        dequeue();
+                        break;
+                    case 3:
+                        display();
+                        break;
+                    case 4:
+                        exit(0);
+                    default:
+                        printf("Wrong choice:\n");
+                    }
+                } 
+                return 0;
+            }
+        </pre>
+    </div>
+</body>
+</html>

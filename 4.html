@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program4</title>
+</head>
+<body>
+    <div>
+        <pre>
+            #include<stdio.h>
+            #include<string.h>
+            #include<ctype.h>
+            #define MAX 100
+            char stack[100];
+            int top = -1;
+            void push(char x) {
+                stack[++top] = x;
+            }
+            char pop() {
+                return stack[top--];
+            }
+            
+            int checkPriority (char op1) {
+                if (op1 == '^') return 3;
+                else if (op1 == '/' || op1 == '*' || op1 == '%') return 2;
+                else if (op1 == '+' || op1 == '-') return 1;
+                return 0;
+            }
+            int main () {
+                char exp[MAX], res[MAX];
+                printf("Enter the expression : ");
+                scanf("%[^/n]",exp);
+                int j = 0;
+                for (int i = 0; i < strlen(exp); i++) {
+                   if (isalnum(exp[i])) res[j++] = exp[i];
+                   else if (exp[i] == ' ') continue;
+                   else if (exp[i] == '(') push('(');
+                   else if (exp[i] == ')') {
+                    while (stack[top] != '(') {
+                        char op = pop();
+                        res[j++] = op;
+                    }
+                    pop();
+                   }
+                   else if (top == -1) push(exp[i]);
+                   else {
+                    int p1 = checkPriority(stack[top]);
+                    int p2 = checkPriority(exp[i]);
+                    if (p2 > p1) push(exp[i]);
+                    else {
+                        while (p1 >= p2 && top != -1) {
+                            char op = pop();
+                            res[j++] = op;
+                            p1 = checkPriority(stack[top]);
+                        }
+                        push(exp[i]);
+                    }
+                   }
+                }
+                while (top != -1) {
+                    char op = pop();
+                    res[j++] = op;
+                }
+                res[j] = '\0';
+                
+                printf("Infix expression is: %s\n", exp);
+                printf("Postfix expression is: %s\n", res);
+                return 0;
+            }
+        </pre>
+    </div>
+</body>
+</html>
